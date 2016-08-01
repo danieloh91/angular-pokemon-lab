@@ -22,13 +22,13 @@
       </div>
     </nav>
     <div class="container col-md-8 col-md-offset-2" ng-controller="pokemonController as pokemonCtrl">
-      <form class="col-md-8 col-md-offset-2" action="index.html" method="post">
+      <form class="col-md-8 col-md-offset-2" ng-submit="pokemonCtrl.createPoke()">
         <h1>Enter Pokemon</h1>
         <input type="text" class="form-control" placeholder="name" ng-model="pokemonCtrl.newPoke.name">
-        <input type="text" class="form-control" placeholder="newPoke #" ng-model="pokemonCtrl.newPoke.pokedex">
+        <input type="text" class="form-control" placeholder="PokeDex #" ng-model="pokemonCtrl.newPoke.pokedex">
         <input type="text" class="form-control" placeholder="evolves from" ng-model="pokemonCtrl.newPoke.evolves_from">
         <input type="text" class="form-control" placeholder="image url" ng-model="pokemonCtrl.newPoke.image">
-        <button type="submit" class="btn btn-primary">Enter</button>
+        <button type="submit" name="button" class="btn btn-primary">Enter</button>
       </form>
       <div ng-repeat="poke in pokemonCtrl.pokemon" class="row">
         <div class="col-md-8 col-md-offset-2">
