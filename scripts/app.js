@@ -1,5 +1,13 @@
 console.log('app.js loaded!');
 
+// $(document).ready(function(){
+//   $('')
+// });
+
+
+
+
+
 angular
       .module("pokeApp", [])
       .controller("pokemonController", pokemonController);
@@ -33,8 +41,23 @@ function pokemonController ($http) {
     });
   };
 
-  vm.deletePoke = function () {
-    
+  vm.editPoke = function (poke) {
+    $http({
+      method: 'PUT'
+    });
+  };
+
+  vm.deletePoke = function (poke) {
+    $http({
+      method: 'DELETE',
+      url: 'https://super-crud.herokuapp.com/pokemon/' + poke._id,
+      data: poke
+    }).then(function successCallback(response) {
+      var index = vm.pokemon.indexOf(poke);
+      vm.pokemon.splice(index, 1);
+    }, function errorCallback(response) {
+      console.log('There was an error deleting the data', response);
+    });
   };
 
 }
