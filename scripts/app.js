@@ -35,6 +35,8 @@ function pokemonController ($http) {
       data: vm.newPoke
     }).then(function successCallback(response) {
       vm.pokemon.push(response.data);
+      vm.pokeForm.$setPristine();
+      vm.pokeForm.$setUntouched();
       console.log(response.data);
     }, function errorCallback(response) {
       console.log('There was an error posting the data', response);
@@ -43,7 +45,14 @@ function pokemonController ($http) {
 
   vm.editPoke = function (poke) {
     $http({
-      method: 'PUT'
+      method: 'PUT',
+      url: 'https://super-crud.herokuapp.com/pokemon/' + poke._id,
+      data: poke
+    }).then(function successCallback(json) {
+      console.log('edited!');
+      vm.pokemon.push(json.data);
+    }, function errorCallback(response) {
+      console.log('There was an error deleting the data', response);
     });
   };
 
@@ -52,7 +61,7 @@ function pokemonController ($http) {
       method: 'DELETE',
       url: 'https://super-crud.herokuapp.com/pokemon/' + poke._id,
       data: poke
-    }).then(function successCallback(response) {
+    }).then(function successCallback(json) {
       var index = vm.pokemon.indexOf(poke);
       vm.pokemon.splice(index, 1);
     }, function errorCallback(response) {
